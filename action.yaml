@@ -1,4 +1,4 @@
-name: azure/create-new-container
+name: dagonco/create-new-container
 description: Create a container in Azure Blob
 
 inputs:
