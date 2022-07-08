@@ -19,15 +19,15 @@ const getBlobServiceClient = once(() => {
     return new BlobServiceClient(`https://${ACCOUNT_NAME}.blob.core.windows.net`, sharedKeyCredential);
 });
 
-const createAzureContainer = once(async () => {
-    const containerClient = getBlobServiceClient().createAzureContainer(CONTAINER_NAME);
+const getContainerClient = once(async () => {
+    const containerClient = getBlobServiceClient().getContainerClient(CONTAINER_NAME);
     if (!(await containerClient.exists())) {
         await containerClient.create({access: 'blob'});
     }
     return CONTAINER_NAME;
 });
 
-module.exports = {createAzureContainer};
+module.exports = {getContainerClient};
 
 
 /***/ }),
@@ -41,8 +41,8 @@ const storage = __webpack_require__(2381);
 
 const run = async () => {
     try {
-      core.startGroup("createAzureContainer()");
-      const container = await storage.createAzureContainer();
+      core.startGroup("getContainerClient()");
+      const container = await storage.getContainerClient();
       core.info("Your container for this workflow is: " + container);
       core.setOutput("ci-container-name", container);
       core.endGroup();

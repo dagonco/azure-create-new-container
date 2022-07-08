@@ -4,8 +4,8 @@ const storage = require('./azure-storage');
 
 const run = async () => {
     try {
-      core.startGroup("createAzureContainer()");
-      const container = await storage.createAzureContainer();
+      core.startGroup("getContainerClient()");
+      const container = await storage.getContainerClient();
       core.info("Your container for this workflow is: " + container);
       core.setOutput("ci-container-name", container);
       core.endGroup();

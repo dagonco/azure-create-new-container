@@ -12,12 +12,12 @@ const getBlobServiceClient = once(() => {
     return new BlobServiceClient(`https://${ACCOUNT_NAME}.blob.core.windows.net`, sharedKeyCredential);
 });
 
-const createAzureContainer = once(async () => {
-    const containerClient = getBlobServiceClient().createAzureContainer(CONTAINER_NAME);
+const getContainerClient = once(async () => {
+    const containerClient = getBlobServiceClient().getContainerClient(CONTAINER_NAME);
     if (!(await containerClient.exists())) {
         await containerClient.create({access: 'blob'});
     }
     return CONTAINER_NAME;
 });
 
-module.exports = {createAzureContainer};
+module.exports = {getContainerClient};
