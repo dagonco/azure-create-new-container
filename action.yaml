@@ -1,0 +1,21 @@
+name: azure/create-new-container
+description: Create a container in Azure Blob
+
+inputs:
+  azure-account-name:
+    description: "Azure Account Name"
+    required: true
+  azure-account-key:
+    description: "Azure Account Key"
+    required: true
+  azure-container-name:
+    description: "Container name"
+    required: true
+
+outputs:
+  ci-container_name:
+    description: "Azure container for this workflow"
+
+runs:
+  using: node12
+  main: dist/index.js
